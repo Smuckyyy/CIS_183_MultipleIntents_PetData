@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity
 
     String[] test = {"Hello","hi","hola"};
     ListView lv_j_listOfPets;
+    PetListAdapter plAdapter;
 
 
     @Override
@@ -81,6 +82,8 @@ public class MainActivity extends AppCompatActivity
 
         //Call functions here
         addDummyDataToArrayList();
+        displayAllPetData();
+        fillListView();
 
     }
 
@@ -107,5 +110,11 @@ public class MainActivity extends AppCompatActivity
         {
             Log.d("Pet Info", listOfPets.get(i).getName());
         }
+    }
+
+    private void fillListView()
+    {
+        plAdapter = new PetListAdapter(this, listOfPets);
+        lv_j_listOfPets.setAdapter(plAdapter);
     }
 }

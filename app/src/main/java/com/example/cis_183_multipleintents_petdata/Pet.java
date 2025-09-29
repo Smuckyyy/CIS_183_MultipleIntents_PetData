@@ -1,9 +1,10 @@
 package com.example.cis_183_multipleintents_petdata;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Pet
+public class Pet implements Serializable
 {
     //A pet is comprised of the following information
     //name, age, and type

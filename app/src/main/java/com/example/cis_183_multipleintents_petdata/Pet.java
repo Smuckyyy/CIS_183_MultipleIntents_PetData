@@ -29,7 +29,7 @@ public class Pet
         type = t;
     }
 
-    //To have android studio make getters and setters, right click, generate, and ctrl+click all variables you want to be getters and setters
+    //***To have android studio make getters and setters, right click, generate, and ctrl+click all variables you want to be getters and setters***
 
     public String getName()
     {
@@ -77,6 +77,7 @@ public class Pet
             return typeofPet;
         }
 
+        //This function below is an ADD function
         public static void addPet(String t)
         {
             typeofPet.add(t);

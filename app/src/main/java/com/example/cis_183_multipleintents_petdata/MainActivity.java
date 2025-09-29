@@ -2,6 +2,8 @@ package com.example.cis_183_multipleintents_petdata;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +19,12 @@ public class MainActivity extends AppCompatActivity
     //needs to be below MainActivity and above OnCreate
     ArrayList<Pet> listOfPets;
 
+    //This is going to be used for testing purposes only
+    //Just to show on listview interact well with arrays***
+
+    String[] test = {"Hello","hi","hola"};
+    ListView lv_j_listOfPets;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -26,33 +34,54 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.lv_v_listOfPets), (v, insets) ->
         {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
+
         //I also need a list to house all pets for the vet clinic
-        ArrayList<Pet> listOfPets = new ArrayList<>();
+        listOfPets = new ArrayList<>();
+
+        //GUI Connection
+        lv_j_listOfPets = findViewById(R.id.lv_v_listOfPets);
+
+        //We need an adapter to be used with the listview
+        //If the cells (boxes in a listview) require more than one string being displayed
+        //Different color, different color text, etc.
+        //You MUST create your own custom adapter
+
+        //ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, test );
+        //lv_j_listOfPets.setAdapter(adapter);
+            //^Context means where am I coming from (this means THIS specific class or .java file
 
         //This makes a chunk of data using the class file, having a name, age and type
         Pet pet = new Pet();
-        //This creates a pet using the setters and getters
+        //This creates a pet using the default constructor
         pet.setName("Tito");
         pet.setAge(12);
         pet.setType("Dog");
 
+        //Add the new pet to our list
+        listOfPets.add(pet);
+
         //Using an overloaded constructor, this is how you can easily add new pets/information
         Pet anotherPet = new Pet("Willow", 5, "Dog");
 
-        //We do not want this; we want to touch code as little as possible, we do not want to add pets using the code everytime, instead using xml and gui for UX (User Experience)
-        Pet pet2;
+
+        //We do not want this instead; we want to touch code as little as possible, we do not want to add pets using the code everytime, instead using xml and gui for UX (User Experience)
+        //Pet pet2;
 
         //Any log.d messages are shown inside of Logcat
         //Use this to your advantage to see how things are working in the background
         //If classes arent imported just right click and import them, no worries
-        Log.d("Pet Data: ", pet.getName() + " is a " + pet.getType() + " and is " + pet.getAge() + " years old.");
+        //Log.d("Pet Data: ", pet.getName() + " is a " + pet.getType() + " and is " + pet.getAge() + " years old.");
+
+        //Call functions here
+        addDummyDataToArrayList();
+
     }
 
     private void addDummyDataToArrayList()
@@ -65,9 +94,18 @@ public class MainActivity extends AppCompatActivity
         //Pet.PetType works because it is static, and it will load between intents/screens
         Pet newPet = new Pet("Tito", 7, Pet.PetType.petAt(0));
         listOfPets.add(newPet);
-        newPet = new Pet("Willow", 3, Pet.PetType.petAt(1));
+        newPet = new Pet("Meowth", 3, Pet.PetType.petAt(1));
         listOfPets.add(newPet);
         newPet = new Pet("Whiskers", 9, Pet.PetType.petAt(1));
         listOfPets.add(newPet);
+
+    }
+
+    private void displayAllPetData()
+    {
+        for(int i = 0; i < listOfPets.size(); i++)
+        {
+            Log.d("Pet Info", listOfPets.get(i).getName());
+        }
     }
 }

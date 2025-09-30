@@ -48,7 +48,7 @@ public class PetListAdapter extends BaseAdapter
         //This all handles the GUI of the cells (listview)
         if(view == null)
         {
-            LayoutInflater mInflater = (LayoutInflater) context.getSystemService(MainActivity.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = mInflater.inflate(R.layout.pet_cell, null);
         }
 

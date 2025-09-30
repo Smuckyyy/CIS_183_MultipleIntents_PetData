@@ -2,7 +2,6 @@ package com.example.cis_183_multipleintents_petdata;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
@@ -17,7 +16,7 @@ public class MainActivity extends AppCompatActivity
 {
     //Anything that needs to be declared throughout the entire java class
     //needs to be below MainActivity and above OnCreate
-    ArrayList<Pet> listOfPets;
+    private ArrayList<Pet> listOfPets;
 
     //This is going to be used for testing purposes only
     //Just to show on listview interact well with arrays***
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.lv_v_listOfPets), (v, insets) ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.ConstraintLayout), (v, insets) ->
         {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

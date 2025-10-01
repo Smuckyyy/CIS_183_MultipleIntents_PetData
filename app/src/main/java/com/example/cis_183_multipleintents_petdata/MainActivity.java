@@ -1,7 +1,10 @@
 package com.example.cis_183_multipleintents_petdata;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
@@ -24,6 +27,7 @@ public class MainActivity extends AppCompatActivity
     String[] test = {"Hello","hi","hola"};
     ListView lv_j_listOfPets;
     PetListAdapter plAdapter;
+    Intent intent_j_displayUpdate;
 
 
     @Override
@@ -47,6 +51,10 @@ public class MainActivity extends AppCompatActivity
 
         //GUI Connection
         lv_j_listOfPets = findViewById(R.id.lv_v_listOfPets);
+
+        //Get an instance of PetDisplayUpdate
+        //New intents always ask for where you are now (in this case MainActivity and then where you want to go (.class)
+        intent_j_displayUpdate = new Intent(MainActivity.this, PetDisplayUpdate.class);
 
         //We need an adapter to be used with the listview
         //If the cells (boxes in a listview) require more than one string being displayed
@@ -83,6 +91,7 @@ public class MainActivity extends AppCompatActivity
         addDummyDataToArrayList();
         displayAllPetData();
         fillListView();
+        setOnClickListenerForListView();
 
     }
 
@@ -115,5 +124,26 @@ public class MainActivity extends AppCompatActivity
     {
         plAdapter = new PetListAdapter(this, listOfPets);
         lv_j_listOfPets.setAdapter(plAdapter);
+    }
+
+    private void setOnClickListenerForListView()
+    {
+        lv_j_listOfPets.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                Pet petSelected = listOfPets.get(position);
+                goToPetDisplayUpdate(petSelected);
+                //Testing purposes
+                //Log.d("Pet Selected: ", petSelected.getName());
+            }
+        });
+    }
+
+    public void goToPetDisplayUpdate(Pet pet)
+    {
+        intent_j_displayUpdate.putExtra("PetData", pet);
+        startActivity(intent_j_displayUpdate);
     }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
@@ -19,7 +20,9 @@ public class MainActivity extends AppCompatActivity
 {
     //Anything that needs to be declared throughout the entire java class
     //needs to be below MainActivity and above OnCreate
-    private ArrayList<Pet> listOfPets;
+    static private ArrayList<Pet> listOfPets;
+    static int numberTestingLoad = 50;
+    static boolean firstLoad = true;
 
     //This is going to be used for testing purposes only
     //Just to show on listview interact well with arrays***
@@ -27,7 +30,9 @@ public class MainActivity extends AppCompatActivity
     String[] test = {"Hello","hi","hola"};
     ListView lv_j_listOfPets;
     PetListAdapter plAdapter;
+    Button btn_j_addPet;
     Intent intent_j_displayUpdate;
+    Intent AddPet;
 
 
     @Override
@@ -45,12 +50,38 @@ public class MainActivity extends AppCompatActivity
             return insets;
         });
 
+        Intent cameFrom = getIntent();
 
-        //I also need a list to house all pets for the vet clinic
-        listOfPets = new ArrayList<>();
+        if(cameFrom.getSerializableExtra("PetData") != null)
+        {
+            //Fix this during lecture
+            //Pet petData = cameFrom.getSerializableExtra("petData");
+            //listOfPets.add(petData);
+        }
+        else
+        {
+            listOfPets = new ArrayList<>();
+            Pet pet = new Pet();
+            //This creates a pet using the default constructor
+            pet.setName("Tito");
+            pet.setAge(12);
+            pet.setType("Dog");
+            //Add the new pet to our list
+            listOfPets.add(pet);
+            //Using an overloaded constructor, this is how you can easily add new pets/information
+            Pet anotherPet = new Pet("Willow", 5, "Dog");
+            addDummyDataToArrayList();
+
+            firstLoad = false;
+        }
+
+        //AddPet Button
+        AddPet = new Intent(MainActivity.this, AddPet.class);
 
         //GUI Connection
         lv_j_listOfPets = findViewById(R.id.lv_v_listOfPets);
+
+        btn_j_addPet = findViewById(R.id.btn_v_addPet);
 
         //Get an instance of PetDisplayUpdate
         //New intents always ask for where you are now (in this case MainActivity and then where you want to go (.class)
@@ -65,20 +96,6 @@ public class MainActivity extends AppCompatActivity
         //lv_j_listOfPets.setAdapter(adapter);
             //^Context means where am I coming from (this means THIS specific class or .java file
 
-        //This makes a chunk of data using the class file, having a name, age and type
-        Pet pet = new Pet();
-        //This creates a pet using the default constructor
-        pet.setName("Tito");
-        pet.setAge(12);
-        pet.setType("Dog");
-
-        //Add the new pet to our list
-        listOfPets.add(pet);
-
-        //Using an overloaded constructor, this is how you can easily add new pets/information
-        Pet anotherPet = new Pet("Willow", 5, "Dog");
-
-
         //We do not want this instead; we want to touch code as little as possible, we do not want to add pets using the code everytime, instead using xml and gui for UX (User Experience)
         //Pet pet2;
 
@@ -88,10 +105,10 @@ public class MainActivity extends AppCompatActivity
         //Log.d("Pet Data: ", pet.getName() + " is a " + pet.getType() + " and is " + pet.getAge() + " years old.");
 
         //Call functions here
-        addDummyDataToArrayList();
         displayAllPetData();
         fillListView();
         setOnClickListenerForListView();
+        setOnButtClickListener();
 
     }
 
@@ -141,9 +158,28 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
+    private void setOnButtClickListener()
+    {
+        btn_j_addPet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                startActivity(AddPet);
+                //Missing data here
+
+
+            }
+        });
+    }
+
     public void goToPetDisplayUpdate(Pet pet)
     {
         intent_j_displayUpdate.putExtra("PetData", pet);
         startActivity(intent_j_displayUpdate);
+    }
+
+    public void addPet(Pet p)
+    {
+        //Missing data here
     }
 }

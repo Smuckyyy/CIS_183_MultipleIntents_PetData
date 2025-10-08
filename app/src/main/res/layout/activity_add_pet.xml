@@ -14,10 +14,22 @@
         android:text="Go Back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.223"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.93" />
+        app:layout_constraintVertical_bias="0.927" />
+
+    <Button
+        android:id="@+id/btn_v_add_addPet"
+        android:layout_width="152dp"
+        android:layout_height="82dp"
+        android:text="Add Pet"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.387"
+        app:layout_constraintStart_toEndOf="@+id/btn_v_goBack"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.927" />
 
     <EditText
         android:id="@+id/et_v_petName"
@@ -68,24 +80,33 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
         android:text="Pet Type"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/et_v_petType"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_v_petAge" />
 
-    <EditText
-        android:id="@+id/et_v_petType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
+    <Spinner
+        android:id="@+id/sp_v_petType"
+        android:layout_width="406dp"
+        android:layout_height="66dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_v_goBack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_v_petAge"
-        app:layout_constraintVertical_bias="0.643" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="0.178" />
+
+    <TextView
+        android:id="@+id/tv_v_addType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add New Type"
+        android:textColor="#203BE6"
+        android:textStyle="italic"
+        tools:layout_editor_absoluteX="304dp"
+        tools:layout_editor_absoluteY="514dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

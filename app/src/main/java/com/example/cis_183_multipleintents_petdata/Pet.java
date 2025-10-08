@@ -79,7 +79,7 @@ public class Pet implements Serializable
         }
 
         //This function below is an ADD function
-        public static void addPet(String t)
+        public static void addPetType(String t)
         {
             typeofPet.add(t);
         }

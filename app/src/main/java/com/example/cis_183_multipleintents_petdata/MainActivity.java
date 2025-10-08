@@ -50,13 +50,14 @@ public class MainActivity extends AppCompatActivity
             return insets;
         });
 
+        Log.d("MainActivity", numberTestingLoad + "");
         Intent cameFrom = getIntent();
 
         if(cameFrom.getSerializableExtra("PetData") != null)
         {
             //Fix this during lecture
-            //Pet petData = cameFrom.getSerializableExtra("petData");
-            //listOfPets.add(petData);
+            Pet petData = (Pet) cameFrom.getSerializableExtra("PetData");
+            listOfPets.add(petData);
         }
         else
         {
@@ -70,6 +71,8 @@ public class MainActivity extends AppCompatActivity
             listOfPets.add(pet);
             //Using an overloaded constructor, this is how you can easily add new pets/information
             Pet anotherPet = new Pet("Willow", 5, "Dog");
+            listOfPets.add(anotherPet);
+
             addDummyDataToArrayList();
 
             firstLoad = false;
@@ -108,7 +111,7 @@ public class MainActivity extends AppCompatActivity
         displayAllPetData();
         fillListView();
         setOnClickListenerForListView();
-        setOnButtClickListener();
+        addPetButtonClickListener();
 
     }
 
@@ -158,14 +161,22 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-    private void setOnButtClickListener()
+    private void addPetButtonClickListener()
     {
-        btn_j_addPet.setOnClickListener(new View.OnClickListener() {
+        btn_j_addPet.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v)
             {
+                numberTestingLoad = 99;
+                Log.d("Value after change", numberTestingLoad + "");
+                Log.d("Value after change", numberTestingLoad + "");
+                //if we want to pass the intent data
+                //we need to make a bundle
+                //first param: name of "variable"
+                //second param: the data to pass to this intent
+                AddPet.putExtra("InfoPassed","Hello from main");
                 startActivity(AddPet);
-                //Missing data here
 
 
             }
